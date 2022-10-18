@@ -4,11 +4,14 @@ const Bar = ({ items, count, width, height }) => {
     console.log(items);
     let index = 0;
 
+    let el = [];
+
+    for (let i = 0; i < items.length; i++) {
+        el.push(<BarItem color={items[i].color} cnt={count[index++]} height={height} />)
+    }
     return (
-        <div className="progress" style={{ width: width + '%', height: height + 'px' }}>
-            {items.map(
-                item => <BarItem key={item.name} color={item.color} percent={count[index++]} />
-            )}
+        <div className="progress align-items-center justify-content-between" style={{ width: width + '%', height: height + 'px' }}>
+            {el}
         </div>
     )
 }

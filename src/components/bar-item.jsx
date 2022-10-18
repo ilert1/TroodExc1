@@ -1,17 +1,24 @@
 import React from 'react';
 
-export default function barItem({ color, percent }) {
+export default function barItem({ color, cnt, height }) {
     const itemStyle = {
-        width: percent + '%',
         backgroundColor: color,
+        marginLeft: 1 + 'px',
+        border: 1 + 'px solid',
+        width: 10 + 'px',
+        height: height + 'px',
+        borderRadius: 25 + '%',
     }
 
-    console.log(color, percent);
-
+    function createMyELem(key) {
+        return <div key={key} style={itemStyle}></div>
+    }
+    const myItems = [];
+    for (let i = 0; i < cnt; i++) {
+        myItems.push(createMyELem(i));
+    }
     return (
-
-        <div className="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="30"
-            style={itemStyle} ></div>
+        <> {myItems} </>
     )
 };
 

@@ -12,7 +12,7 @@ function findAmounts(items, n) {
     for (let item of items) {
         mass.push(+((item.value * 100) / sum).toFixed(2));
     }
-
+    let percentage = [...mass];
     for (let i = 0; i < mass.length; i++) {
         let item = mass[i];
         if (item === 0) {
@@ -37,20 +37,21 @@ function findAmounts(items, n) {
             }
         }
     }
-    let newMass = [];
+    let count = [];
     for (let elem of mass) {
-        newMass.push(+((elem * n) / 100));
+        count.push(+((elem * n) / 100));
     }
 
-    return newMass;
+    return { percentage, count };
 }
 
 function App() {
     const items = api.items.fetchAll();
     let n = 100;
     if (items.width <= 50) n = 50;
-    let count = findAmounts(items.items, n);
-    console.log(count);
+    let { percentage, count } = findAmounts(items.items, n);
+    // console.log(percentage);
+    // console.log(count);
     return (
         <div className="App">
             <Bar
@@ -59,12 +60,12 @@ function App() {
                 width={items.width}
                 height={items.height}
             />
-            {/* <BarAbout
+            <BarAbout
                 items={items.items}
-                count={count}
+                percentage={percentage}
                 width={items.width}
                 height={items.height}
-            /> */}
+            />
         </div>
     );
 }
